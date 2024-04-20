@@ -1,7 +1,7 @@
 # coding: utf-8
 # github: https://github.com/php-ast/php-ast
 # author: php_ast
-# version: 1.0
+# version: 1.1
 # time 2024-04-20
 
 from ctypes import cdll, c_int, POINTER, c_void_p

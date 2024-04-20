@@ -3,7 +3,7 @@
 
 #install 
 ```bash
-    pip install php_ast
+    btpip install -i https://pypi.tuna.tsinghua.edu.cn/simple php-ast
 ```
 
 
