@@ -54,7 +54,9 @@ class php_ast:
         if not data_len_str.isdigit():
             return {"status": "success", "ast": {}}  # 返回空的AST
         data_len = int(data_len_str)
-        data_bytes = os.read(stdout_r, data_len)
+        data_bytes = b""
+        while len(data_bytes) < data_len:
+            data_bytes += os.read(stdout_r, 4096)
         data_str = data_bytes.decode().strip()
         try:
             data = json.loads(data_str)
@@ -62,10 +64,14 @@ class php_ast:
             data = {"status": "success", "ast": {}}
         return data
 
+
     def get_file_ast(self, file_path):
         '''通过文件获取AST'''
-        with open(file_path, 'rb') as f:
-            src = f.read()
+        if not os.path.exists(file_path):
+            return {"status": "success", "ast": {}}
+        f=open(file_path, "rb")
+        src = f.read()
+        f.close()
         return self.get_ast(src)
 
     # 追踪AST
